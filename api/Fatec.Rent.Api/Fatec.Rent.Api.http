@@ -1,0 +1,6 @@
+@Fatec.Rent.Api_HostAddress = http://localhost:5185
+
+GET {{Fatec.Rent.Api_HostAddress}}/vehicle/
+Accept: application/json
+
+###
