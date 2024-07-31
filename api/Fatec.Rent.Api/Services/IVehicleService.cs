@@ -2,5 +2,5 @@
 
 public interface IVehicleService
 {
-    IEnumerable<Vehicle> ListVehicles();
+    Task<IEnumerable<Vehicle>> ListVehicles();
 }

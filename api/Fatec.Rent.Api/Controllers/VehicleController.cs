@@ -14,8 +14,10 @@ namespace Fatec.Rent.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Vehicle>> List(){
-            return Ok(vehicleService.ListVehicles());
+        public async Task<ActionResult<IEnumerable<Vehicle>>> List(){
+            var vehicles = await vehicleService.ListVehicles();
+
+            return vehicles.ToList();
         }
     }
 }

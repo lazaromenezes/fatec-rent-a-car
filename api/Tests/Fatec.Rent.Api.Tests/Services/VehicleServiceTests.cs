@@ -6,18 +6,20 @@ namespace Fatec.Rent.Api.Tests.Services;
 public class VehicleServiceTests
 {
     [Fact]
-    public void ListVehicles_Returns_From_Repository()
+    public async Task ListVehicles_Returns_From_Repository()
     {
+        // ARRANGE
         var expected = new List<Vehicle>{ new() { Id = 1 } };
-
+        
         var repository = new Mock<IVehicleRepository>();
-
-        repository.Setup(r => r.GetAll()).Returns(expected);
+        repository.Setup(r => r.GetAll()).ReturnsAsync(expected);
 
         var subject = new VehicleService(repository.Object);
 
-        var result = subject.ListVehicles();
+        // ACT
+        var result = await subject.ListVehicles();
 
+        // ASSERT
         Assert.Equal(expected, result);
     }
 }

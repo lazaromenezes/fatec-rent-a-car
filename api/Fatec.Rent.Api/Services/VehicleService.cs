@@ -11,7 +11,7 @@ public class VehicleService : IVehicleService
         this.vehicleRepository = vehicleRepository;
     }
 
-    public IEnumerable<Vehicle> ListVehicles()
+    public Task<IEnumerable<Vehicle>> ListVehicles()
     {
         return vehicleRepository.GetAll();
     }

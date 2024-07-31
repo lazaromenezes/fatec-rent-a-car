@@ -2,6 +2,6 @@
 {
     public interface IVehicleRepository
     {
-        IEnumerable<Vehicle> GetAll();
+        Task<IEnumerable<Vehicle>> GetAll();
     }
 }

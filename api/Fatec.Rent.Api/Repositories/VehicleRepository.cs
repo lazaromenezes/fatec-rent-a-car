@@ -9,9 +9,9 @@ namespace Fatec.Rent.Api.Repositories
             new Vehicle {Id = 3, Modelo = "SUV", Features = ["ar", "4 portas", "direção hidraulica", "cambio automatico", "7 lugares"]}
         ];
 
-        public IEnumerable<Vehicle> GetAll()
+        public Task<IEnumerable<Vehicle>> GetAll()
         {
-            return vehicles;
+            return Task.FromResult(vehicles.AsEnumerable());
         }
     }
 }
