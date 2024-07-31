@@ -1,17 +1,24 @@
 ﻿
+using Dapper;
+
 namespace Fatec.Rent.Api.Repositories
 {
     public class VehicleRepository : IVehicleRepository
     {
-        private readonly List<Vehicle> vehicles = [
-            new Vehicle {Id = 1, Modelo = "Hatch", Features = ["ar", "4 portas", "direção hidraulica"]},
-            new Vehicle {Id = 2, Modelo = "Sedan", Features = ["ar", "4 portas", "direção hidraulica", "cambio automatico"]},
-            new Vehicle {Id = 3, Modelo = "SUV", Features = ["ar", "4 portas", "direção hidraulica", "cambio automatico", "7 lugares"]}
-        ];
+        private readonly IDbContext dbContext;
 
-        public Task<IEnumerable<Vehicle>> GetAll()
+        public VehicleRepository(IDbContext dbContext)
         {
-            return Task.FromResult(vehicles.AsEnumerable());
+            this.dbContext = dbContext;
+        }
+
+        public async Task<IEnumerable<Vehicle>> GetAll()
+        {
+            const string QUERY = "SELECT * FROM Vehicle";
+
+            using var connection = dbContext.CreateConnection();
+
+            return await connection.QueryAsync<Vehicle>(QUERY);
         }
     }
 }

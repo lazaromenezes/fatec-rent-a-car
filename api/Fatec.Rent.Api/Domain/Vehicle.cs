@@ -2,8 +2,10 @@
 
 public class Vehicle
 {
-    public int Id {get; set;}
-    public string? Modelo {get; set;}
-
-    public string[] Features {get; set;} = [];
+    public Guid Id { get; set; }
+    public string? Categoria { get; set; }
+    public string? Modelo { get; set; }
+    public int CapacidadePassageiros { get; set; }
+    public string? Combustivel { get; set; }
+    public decimal Preco { get; set; }
 }

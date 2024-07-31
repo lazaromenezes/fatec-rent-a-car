@@ -9,7 +9,7 @@ public class VehicleServiceTests
     public async Task ListVehicles_Returns_From_Repository()
     {
         // ARRANGE
-        var expected = new List<Vehicle>{ new() { Id = 1 } };
+        var expected = new List<Vehicle>{ new() { Id = Guid.NewGuid() } };
         
         var repository = new Mock<IVehicleRepository>();
         repository.Setup(r => r.GetAll()).ReturnsAsync(expected);
