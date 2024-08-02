@@ -1,4 +1,4 @@
-iname: Deploy
+name: Deploy
 
 on:
   push:
@@ -6,59 +6,59 @@ on:
       - main
 
 jobs:
-	build:
+    build:
 
-		runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-		defaults:
-			run:
-				working-directory: api
+        defaults:
+            run:
+               working-directory: api
 
-		steps:
-			- name: Checkout
-				uses: actions/checkout@v4
-	
-			- name: Instalar o dotnet
-				uses: actions/setup-dotnet@v3
-				with:
-					dotnet-version: '8.0.x'
-			
-			- name: Restaurar as dependencias
-				run: dotnet restore 
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4 
 
-			- name: Compilar
-				run: dotnet build
+            - name: Instalar o dotnet
+              uses: actions/setup-dotnet@v3
+              with:
+                dotnet-version: '8.0.x'
+            
+            - name: Restaurar as dependencias
+              run: dotnet restore 
 
-			- name: Testar
-				run: dotnet test
+            - name: Compilar
+              run: dotnet build
 
-			- name: Empacotar
-				run: dotnet publish -c Release -o ./dist
+            - name: Testar
+              run: dotnet test
 
-			- name: Publicar Artefatos
-				uses: actions/upload-artifact@v4
-				with: 
-					name: "API Exportada"
-					path: ./dist
+            - name: Empacotar
+              run: dotnet publish -c Release -o ./dist
 
-	deploy:
+            - name: Publicar Artefatos
+              uses: actions/upload-artifact@v4
+              with: 
+                name: "API Exportada"
+                path: ./dist
 
-		needs: build
+    deploy:
 
-		runs-on: ubuntu-latest
+        needs: build
 
-		steps:
-			- name: Download dos artefatos
-				uses: actions/download-artifact@v4
-				with:
-					name: "API Exportada"
-					path: ./dist
+        runs-on: ubuntu-latest
 
-			- name: Deploy to Azure
-				uses: actions/webapps-deploy@v2
-				with:
-					app-name: 'fatec-rent-a-car-api'
-					publish-profile: ${{ secrets.PUBLISH_PROFILE }}
-					package: ./dist
-		
-			
+        steps:
+            - name: Download dos artefatos
+              uses: actions/download-artifact@v4
+              with:
+                name: "API Exportada"
+                path: ./dist
+
+            - name: Deploy to Azure
+              uses: actions/webapps-deploy@v2
+              with:
+                app-name: 'fatec-rent-a-car-api'
+                publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+                package: ./dist
+        
+            
