@@ -55,7 +55,7 @@ jobs:
                 path: ./dist
 
             - name: Deploy to Azure
-              uses: actions/webapps-deploy@v2
+              uses: azure/webapps-deploy@v2
               with:
                 app-name: 'fatec-rent-a-car-api'
                 publish-profile: ${{ secrets.PUBLISH_PROFILE }}
