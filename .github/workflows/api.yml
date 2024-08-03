@@ -40,5 +40,21 @@ jobs:
               with:
                 app-name: 'fatec-rent-a-car-api'
                 publish-profile: ${{ secrets.PUBLISH_PROFILE }}
-                package: ./dist
+                package: ./dist/*
+        
 
+    deploy:
+
+        needs: build
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Download dos artefatos
+              uses: actions/download-artifact@v4
+              with:
+                name: "API Exportada"
+                path: ./dist
+
+            
+            
