@@ -33,7 +33,7 @@ jobs:
               run: dotnet test
 
             - name: Empacotar
-              run: dotnet publish -c Release -o ./dist
+              run: dotnet publish -c Release -o ./dist Fatec.Rent.Api/Fatec.Rent.Api.csproj
 
             - name: Publicar Artefatos
               uses: actions/upload-artifact@v4
