@@ -33,13 +33,13 @@ jobs:
               run: dotnet test
 
             - name: Empacotar
-              run: dotnet publish -c Release -o ./dist Fatec.Rent.Api/Fatec.Rent.Api.csproj
+              run: dotnet publish -c Release Fatec.Rent.Api/Fatec.Rent.Api.csproj
 
             - name: Publicar Artefatos
               uses: actions/upload-artifact@v4
               with: 
                 name: "API Exportada"
-                path: ./dist/*
+                path: /home/runner/work/fatec-rent-a-car/fatec-rent-a-car/api/Fatec.Rent.Api/bin/Release/net8.0/
 
     deploy:
 
